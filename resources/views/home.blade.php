@@ -22,7 +22,7 @@
           <tbody>
             @forelse ($tasks as $task)
               <tr>
-                <td>{{$task->id}}</td>
+                <td>{{$loop->iteration + $tasks->firstItem() - 1}}</td>
                 <td>{{$task->title}}</td>
                 <td>{{$task->created_at->diffForHumans()}}</td>
                 <td>
@@ -97,9 +97,11 @@
                 },
                 method: "POST",
                 success: function(response) {
-                    /*if(event.val() == 2) {
-                        setTimer(response.time, event);
-                    }*/
+                    location.reload();
+                }, 
+                error: function(a, b, c) {
+                    response = JSON.parse(a.responseText);
+                    alert(response.message);
                     location.reload();
                 }
             })
@@ -119,7 +121,6 @@
 
         function secondsToDhms(seconds) {
             seconds += count;
-            console.log(seconds);
             seconds = Number(seconds);
             var d = Math.floor(seconds / (3600*24));
             var h = Math.floor(seconds % (3600*24) / 3600);

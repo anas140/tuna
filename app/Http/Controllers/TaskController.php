@@ -126,6 +126,15 @@ class TaskController extends Controller
     }
 
     public function status_change(Request $request) {
+        $task_progress_count = Task::where('progress_id', 2)->where('user_id', auth()->user()->id)->count();
+
+        if($request->status == 2 && $task_progress_count != 0) {
+            return response()->json([
+                'message' => 'Error! Already another task have in progress',
+                'status' => 'error',
+            ], 500);    
+        }
+
         $task_progress = new TaskProgress;
         $task_progress->task_id = $request->task;
         $task_progress->progress_id = $request->status;

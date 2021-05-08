@@ -26,7 +26,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->created_at->diffForHumans()}}</td>
-                        <td>0</td>
+                        <td>{{$user->tasks()->count()}}</td>
                       </tr>
                     @empty
                         <p class="text-center">No users</p>

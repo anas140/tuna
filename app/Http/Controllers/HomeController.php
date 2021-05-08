@@ -52,10 +52,6 @@ class HomeController extends Controller
         ]);
     }
 
-    private function calculateDiff($items) {
-        // foreach
-    }
-
     private function secondsToTime($seconds) {
         $dtF = new \DateTime('@0');
         $dtT = new \DateTime("@$seconds");
